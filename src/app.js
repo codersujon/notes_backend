@@ -19,7 +19,7 @@ app.use(express.json());
 // root -> route
 app.get("/", (req, res) => {
   res.status(200).json({
-    message: "Notes API is Running",
+    message: "Note-Taking Platform is Running",
     health: "/api/health"
   });
 });
