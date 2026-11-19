@@ -14,4 +14,7 @@ app.use("/api/admin", require("./routes/adminRoutes"));
 //** note routes */
 app.use("/api/notes", require("./routes/noteRoutes"))
 
+//** posts */
+app.use("/api", require("./routes/postRoutes"));
+
 module.exports = app;

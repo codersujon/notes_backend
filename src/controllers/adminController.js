@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Note = require("../models/Note");
+const Post = require("../models/Post");   
 const paginate = require("../utils/paginate");
 
 const safe = (u) => ({
@@ -101,11 +102,15 @@ exports.deleteUser = async (req, res) => {
 
     // Cascade: owner_1_createdAt_-1 index serves this filter (prefix)
     await Note.deleteMany({ owner: id });
-    // TODO: delete this user's posts after the Post model is added
+    await Post.deleteMany({ author: id });
     await user.deleteOne();
 
-    res.json({ message: "User and their notes deleted" });
+    res.json({ 
+        message: "User, their notes and posts deleted" 
+    });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ 
+        message: err.message 
+    });
   }
 };
