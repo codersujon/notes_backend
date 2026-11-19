@@ -14,4 +14,7 @@ const userSchema = new mongoose.Schema(
 // login lookup + email uniqueness
 userSchema.index({ email: 1 }, { unique: true });
 
+// admin users list (newest first)
+userSchema.index({ createdAt: -1 });
+
 module.exports = mongoose.model("User", userSchema);
