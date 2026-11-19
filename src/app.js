@@ -1,20 +1,39 @@
+
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 app.use(express.json());
 
-//** auth routes */
+// Auth routes
 app.use("/api/auth", require("./routes/authRoutes"));
 
-//** admin routes */
+// Admin routes
 app.use("/api/admin", require("./routes/adminRoutes"));
 
-//** note routes */
-app.use("/api/notes", require("./routes/noteRoutes"))
+// Note routes
+app.use("/api/notes", require("./routes/noteRoutes"));
 
-//** posts */
+// Posts and aggregation routes
 app.use("/api", require("./routes/postRoutes"));
+
+// Health check
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "Notes API is running"
+  });
+});
 
 module.exports = app;
