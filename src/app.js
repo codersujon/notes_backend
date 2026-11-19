@@ -16,6 +16,22 @@ app.use(cors({
 
 app.use(express.json());
 
+// root -> route
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Notes API is Running",
+    health: "/api/health"
+  });
+});
+
+// Health check
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    status: "200",
+    message: "Note-Taking Platform is Running"
+  });
+});
+
 // Auth routes
 app.use("/api/auth", require("./routes/authRoutes"));
 
@@ -27,13 +43,5 @@ app.use("/api/notes", require("./routes/noteRoutes"));
 
 // Posts and aggregation routes
 app.use("/api", require("./routes/postRoutes"));
-
-// Health check
-app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    status: "OK",
-    message: "Notes API is running"
-  });
-});
 
 module.exports = app;
