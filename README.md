@@ -7,7 +7,6 @@ REST API for a note-taking platform with JWT authentication and role-based acces
 ## Live Links
 
 - Frontend GitHub     : https://github.com/codersujon/notes_frontend
-- Backend GitHub      : https://github.com/codersujon/notes_backend
 - Live frontend URL   : https://notes-frontend-ten-pi.vercel.app/
 - Live backend API URL: https://notes-app-backend-yv1s.onrender.com/
 
